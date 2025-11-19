@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Chatbot – Atividade 12/11</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f0f2f5;
+        display: flex;
+        justify-content: center;
+        padding-top: 40px;
+    }
+    .chat-container {
+        width: 350px;
+        background: white;
+        padding: 15px;
+        border-radius: 12px;
+        box-shadow: 0 0 10px #0002;
+    }
+    .messages {
+        height: 250px;
+        overflow-y: auto;
+        border: 1px solid #ddd;
+        padding: 10px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        background: #fafafa;
+    }
+    .msg {
+        margin-bottom: 8px;
+        padding: 6px 8px;
+        border-radius: 6px;
+        max-width: 80%;
+    }
+    .user {
+        background: #d7eaff;
+        align-self: flex-end;
+    }
+    .bot {
+        background: #e6e6e6;
+    }
+    label {
+        font-size: 14px;
+        font-weight: bold;
+    }
+    #inputMsg {
+        width: 100%;
+        padding: 8px;
+        margin-top: 4px;
+        border-radius: 6px;
+        border: 1px solid #bbb;
+    }
+    button {
+        margin-top: 10px;
+        width: 100%;
+        background: #007bff;
+        border: none;
+        padding: 10px;
+        color: white;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    button:hover {
+        background: #005ec4;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="chat-container">
+    <h2>Chatbot – Atividade</h2>
+
+    <div class="messages" id="messagesBox"></div>
+
+    <!-- LEGENDA -->
+    <label for="inputMsg">Digite sua pergunta:</label>
+
+    <!-- CAIXA DE TEXTO -->
+    <input type="text" id="inputMsg" placeholder="Escreva algo...">
+
+    <!-- BOTÃO -->
+    <button onclick="sendMessage()">Enviar</button>
+</div>
+
+<script>
+function sendMessage() {
+    let box = document.getElementById("messagesBox");
+    let input = document.getElementById("inputMsg");
+    let text = input.value.trim();
+
+    if (text === "") {
+        // NOTIFICAÇÃO
+        alert("⚠ Digite alguma mensagem!");
+        return;
+    }
+
+    // Exibir mensagem do usuário
+    box.innerHTML += `<div class='msg user'><strong>Você:</strong> ${text}</div>`;
+    
+    // Limpar caixa de texto
+    input.value = "";
+
+    // Resposta do chatbot (simples)
+    let resposta = gerarResposta(text);
+
+    setTimeout(() => {
+        box.innerHTML += `<div class='msg bot'><strong>Bot:</strong> ${resposta}</div>`;
+        box.scrollTop = box.scrollHeight;
+    }, 500);
+}
+
+function gerarResposta(msg) {
+    msg = msg.toLowerCase();
+
+    if (msg.includes("oi") || msg.includes("olá")) 
+        return "Olá! Como posso ajudar?";
+    if (msg.includes("dieta")) 
+        return "Para uma dieta equilibrada, inclua proteínas, frutas e vegetais.";
+    if (msg.includes("chatbot")) 
+        return "Sou um chatbot simples criado para esta atividade!";
+    
+    return "Não entendi, mas posso tentar ajudar com outra pergunta!";
+}
+</script>
+
+</body>
+</html>
